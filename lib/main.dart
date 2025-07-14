@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'screens/home_page.dart';
 import 'screens/chat_page.dart';
 import 'screens/report_upload_page.dart';
@@ -21,10 +22,9 @@ class AIDoctorApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: kBackgroundColor,
-        textTheme: Theme.of(context).textTheme.apply(
-              bodyColor: kPrimaryColor,
-              fontFamily: 'Montserrat',
-            ),
+        textTheme: GoogleFonts.montserratTextTheme(
+          Theme.of(context).textTheme,
+        ).apply(bodyColor: kPrimaryColor),
         primarySwatch: Colors.teal,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
