@@ -13,8 +13,8 @@ import 'utils/constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    // You'll configure this with your Firebase project settings
-  );
+      // You'll configure this with your Firebase project settings
+      );
   runApp(const AIDoctorApp());
 }
 
@@ -66,12 +66,12 @@ class AuthWrapper extends StatelessWidget {
             ),
           );
         }
-        
+
         // If user is logged in, show home page
         if (snapshot.hasData && snapshot.data != null) {
           return HomePage();
         }
-        
+
         // If user is not logged in, show login screen
         return const LoginScreen();
       },
