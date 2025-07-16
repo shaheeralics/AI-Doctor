@@ -30,8 +30,11 @@ class MyApp extends StatelessWidget {
         // home: The first widget displayed when the app starts
         home: Scaffold(
             appBar: AppBar(
-              title: const Text('AI DOCTOR'
-              selectionColor: Color.fromARGB(22, 12, 12, 25),
+              centerTitle: true,
+              title: const Text(
+                'AI DOCTOR',
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
               ),
               backgroundColor: Color.fromARGB(255, 93, 221, 241),
             ),
@@ -40,6 +43,7 @@ class MyApp extends StatelessWidget {
 
             body: const Column(
               //Padding from sides,)
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
                   padding: EdgeInsets.only(top: 100),
