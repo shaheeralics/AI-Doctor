@@ -10,32 +10,98 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Hello Flutter'),
+        // title: A description for the device's task switcher
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Widgets Demo',
+        // theme: Defines the overall visual theme of the app
+        theme: ThemeData(
+          primarySwatch: Colors.blue, // Sets a primary color and its shades
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.indigo, // Custom AppBar background
+            foregroundColor: Colors.white, // Custom AppBar text/icon color
+          ),
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(fontSize: 16.0, color: Colors.black87),
+            headlineSmall:
+                TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+          ),
+          useMaterial3: true, // Opt-in to Material 3 design
         ),
-        body: Stack( // <--- Change Scaffold body to a Stack
-          children: <Widget>[
-            Positioned( // <--- Wrap your Text in a Positioned widget
-              top: 50.0, // Adjust this value for distance from the top in pixels
-              left: 20.0, // Adjust this value for distance from the left in pixels
-              // Or you can use 'right' for alignment from the right side:
-              // right: 20.0,
-
-              child: const Text( // Your 'Login' text
-                'Login',
-                style: TextStyle(fontSize: 20),
+        // home: The first widget displayed when the app starts
+        home: Scaffold(
+            appBar: AppBar(
+              title: const Text('AI DOCTOR'
+              selectionColor: Color.fromARGB(22, 12, 12, 25),
               ),
+              backgroundColor: Color.fromARGB(255, 93, 221, 241),
             ),
-            // You can add other widgets here if you want to layer them
-            // For example, another text field or an image
-          ],
-        ),
-      ),
-    );
+            backgroundColor: const Color.fromARGB(255, 202, 245, 252),
+            // defining the column
+
+            body: const Column(
+              //Padding from sides,)
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 100),
+                ),
+
+                Text(
+                  'Login',
+                  style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(157, 0, 0, 0)),
+                ),
+                // padding from top
+                Padding(
+                  padding: EdgeInsets.only(top: 40.0),
+                ),
+
+                // text for email
+                Text(
+                  'Email',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                ),
+
+                //textfield for email with outer boudary line and padding from side
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Enter your email',
+                  ),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.only(top: 30),
+                ),
+
+                //text for password
+                Text('Password', style: TextStyle(fontSize: 16.0)),
+
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                ),
+
+                TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your password',
+                  ),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.only(top: 25),
+                ),
+
+                // button for login
+                ElevatedButton(
+                  onPressed: null,
+                  child: Text('Login'),
+                )
+              ],
+            )));
   }
 }
