@@ -1,111 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+// Import screens
+import 'screens/login_screen/login_screen.dart';
+import 'screens/sign_up_screen/sign_up_screen.dart';
+import 'screens/chat_screen/chat_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const AIDocConnectApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AIDocConnectApp extends StatelessWidget {
+  const AIDocConnectApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return MaterialApp(
-        // title: A description for the device's task switcher
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Widgets Demo',
-        // theme: Defines the overall visual theme of the app
-        theme: ThemeData(
-          primarySwatch: Colors.blue, // Sets a primary color and its shades
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.indigo, // Custom AppBar background
-            foregroundColor: Colors.white, // Custom AppBar text/icon color
-          ),
-          textTheme: const TextTheme(
-            bodyMedium: TextStyle(fontSize: 16.0, color: Colors.black87),
-            headlineSmall:
-                TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-          ),
-          useMaterial3: true, // Opt-in to Material 3 design
+      title: 'AI DocConnect',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.light,
+        colorSchemeSeed: Colors.lightBlue,
+        scaffoldBackgroundColor: Colors.blue[50],
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.lightBlue,
+          foregroundColor: Colors.white,
+          elevation: 2,
         ),
-        // home: The first widget displayed when the app starts
-        home: Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              title: const Text(
-                'AI DOCTOR',
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-              ),
-              backgroundColor: Color.fromARGB(255, 93, 221, 241),
-            ),
-            backgroundColor: const Color.fromARGB(255, 202, 245, 252),
-            // defining the column
+        inputDecorationTheme: const InputDecorationTheme(
+          filled: true,
+          fillColor: Colors.white,
+        ),
+      ),
 
-            body: const Column(
-              //Padding from sides,)
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 100),
-                ),
+      // 👇 Show LoginScreen first
+      initialRoute: '/',
 
-                Text(
-                  'Login',
-                  style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(157, 0, 0, 0)),
-                ),
-                // padding from top
-                Padding(
-                  padding: EdgeInsets.only(top: 40.0),
-                ),
-
-                // text for email
-                Text(
-                  'Email',
-                  style: TextStyle(fontSize: 16.0),
-                ),
-
-                Padding(
-                  padding: EdgeInsets.only(top: 10),
-                ),
-
-                //textfield for email with outer boudary line and padding from side
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Enter your email',
-                  ),
-                ),
-
-                Padding(
-                  padding: EdgeInsets.only(top: 30),
-                ),
-
-                //text for password
-                Text('Password', style: TextStyle(fontSize: 16.0)),
-
-                Padding(
-                  padding: EdgeInsets.only(top: 10),
-                ),
-
-                TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: 'Enter your password',
-                  ),
-                ),
-
-                Padding(
-                  padding: EdgeInsets.only(top: 25),
-                ),
-
-                // button for login
-                ElevatedButton(
-                  onPressed: null,
-                  child: Text('Login'),
-                )
-              ],
-            )));
+      routes: {
+        '/': (context) => const LoginScreen(),
+        '/signup': (context) => const SignUpScreen(),
+        '/chat': (context) => const ChatScreen(),
+      },
+    );
   }
 }
