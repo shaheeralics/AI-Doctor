@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-// Correct import path for ChatScreen
 import '../chat_screen/chat_screen.dart';
 
 class LoginScreen extends StatefulWidget {
