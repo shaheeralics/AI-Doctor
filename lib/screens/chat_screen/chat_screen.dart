@@ -36,8 +36,7 @@ class _ChatScreenState extends State<ChatScreen> {
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color:
-              isUser ? Colors.lightBlueAccent.withOpacity(0.3) : Colors.white,
+          color: isUser ? Colors.lightBlueAccent.withAlpha(77) : Colors.white,
           borderRadius: BorderRadius.circular(14),
         ),
         child: Text(
@@ -69,13 +68,13 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: const Icon(Icons.video_call),
             onPressed: () {
-              // TODO: Implement video call logic
+              // TODo: Implement video call logic
             },
           ),
           IconButton(
             icon: const Icon(Icons.call),
             onPressed: () {
-              // TODO: Implement voice call logic
+              // TODo Implement voice call logic
             },
           ),
         ],
@@ -99,13 +98,13 @@ class _ChatScreenState extends State<ChatScreen> {
                 IconButton(
                   icon: const Icon(Icons.attach_file),
                   onPressed: () {
-                    // TODO: Handle attachments
+                    // TODo: Handle attachments
                   },
                 ),
                 IconButton(
                   icon: const Icon(Icons.mic),
                   onPressed: () {
-                    // TODO: Handle voice message recording
+                    // TODo: Handle voice message recording
                   },
                 ),
                 Expanded(

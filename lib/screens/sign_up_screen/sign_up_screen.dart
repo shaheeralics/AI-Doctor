@@ -94,16 +94,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   IconButton(
                     icon: const FaIcon(FontAwesomeIcons.google,
                         color: Colors.red),
-                    onPressed: () {}, // TODO: Implement Google sign-up
+                    onPressed: () {}, // TODo: Implement Google sign-up
                   ),
                   IconButton(
                     icon: const FaIcon(FontAwesomeIcons.github),
-                    onPressed: () {}, // TODO: Implement GitHub sign-up
+                    onPressed: () {}, // TODo: Implement GitHub sign-up
                   ),
                   IconButton(
                     icon: const FaIcon(FontAwesomeIcons.facebook,
                         color: Colors.blue),
-                    onPressed: () {}, // TODO: Implement Facebook sign-up
+                    onPressed: () {}, // TODo: Implement Facebook sign-up
                   ),
                 ],
               ),

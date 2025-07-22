@@ -85,20 +85,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       icon: const FaIcon(FontAwesomeIcons.google,
                           color: Colors.red),
                       onPressed: () {
-                        // TODO: Implement Google login
+                        // TODo: Implement Google login
                       },
                     ),
                     IconButton(
                       icon: const FaIcon(FontAwesomeIcons.github),
                       onPressed: () {
-                        // TODO: Implement GitHub login
+                        // TODo: Implement GitHub login
                       },
                     ),
                     IconButton(
                       icon: const FaIcon(FontAwesomeIcons.facebook,
                           color: Colors.blue),
                       onPressed: () {
-                        // TODO: Implement Facebook login
+                        // TODo: Implement Facebook login
                       },
                     ),
                   ],
@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20),
                 TextButton(
                   onPressed: () {
-                    // TODO: Navigate to SignUpScreen
+                    // TODo: Navigate to SignUpScreen
                     Navigator.pushNamed(context, '/signup');
                   },
                   child: const Text("Don't have an account? Sign up"),
