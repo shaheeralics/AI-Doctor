@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -9,121 +10,136 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _controller = TextEditingController();
-  final List<Map<String, dynamic>> _messages = [];
+  final List<String> _messages = [];
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  void _sendMessage(String message) {
-    if (message.trim().isEmpty) return;
-    setState(() {
-      _messages.add({'isUser': true, 'text': message});
-    });
-    _controller.clear();
-
-    Future.delayed(const Duration(milliseconds: 500), () {
+  void _sendMessage() {
+    final text = _controller.text.trim();
+    if (text.isNotEmpty) {
       setState(() {
-        _messages.add({
-          'isUser': false,
-          'text': "I'm AI Doctor. How can I help you with your symptoms?"
-        });
+        _messages.add(text);
       });
-    });
+      _controller.clear();
+    }
   }
 
-  Widget _buildMessageBubble(Map<String, dynamic> msg) {
-    final isUser = msg['isUser'];
-    return Align(
-      alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: isUser ? Colors.lightBlueAccent.withAlpha(77) : Colors.white,
-          borderRadius: BorderRadius.circular(14),
-        ),
-        child: Text(
-          msg['text'],
-          style: TextStyle(
-            fontSize: 15,
-            color: isUser ? Colors.black : Colors.black87,
-          ),
-        ),
-      ),
+  Future<void> _pickReportFile() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
     );
+
+    if (result != null && result.files.isNotEmpty) {
+      final file = result.files.first;
+      // You can upload or display the file here
+      print('Picked file: ${file.name}');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        title: const Row(
-          children: [
-            CircleAvatar(
-              backgroundImage: AssetImage('assets/ai_avatar.png'),
-              radius: 16,
-            ),
-            SizedBox(width: 10),
-            Text('AI Doctor'),
-          ],
+        title: const Text('AI DocConnect'),
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: () => _scaffoldKey.currentState!.openDrawer(),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.video_call),
+            icon: const Icon(Icons.call),
             onPressed: () {
-              // TODo: Implement video call logic
+              // Handle call action
             },
           ),
           IconButton(
-            icon: const Icon(Icons.call),
+            icon: const Icon(Icons.mic),
             onPressed: () {
-              // TODo Implement voice call logic
+              // Handle voice message action
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.picture_as_pdf),
+            onPressed: _pickReportFile,
+          ),
         ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: const [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.lightBlue,
+              ),
+              child: Text('Previous Chats', style: TextStyle(color: Colors.white, fontSize: 24)),
+            ),
+            ListTile(
+              title: Text('Chat 1'),
+            ),
+            ListTile(
+              title: Text('Chat 2'),
+            ),
+            // Add dynamically generated chat history items here
+          ],
+        ),
       ),
       body: Column(
         children: [
           Expanded(
             child: ListView.builder(
               reverse: true,
+              padding: const EdgeInsets.all(8),
               itemCount: _messages.length,
               itemBuilder: (context, index) {
                 final msg = _messages[_messages.length - 1 - index];
-                return _buildMessageBubble(msg);
+                return Align(
+                  alignment: Alignment.centerRight,
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.lightBlue[100],
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Text(msg, style: const TextStyle(fontSize: 16)),
+                  ),
+                );
               },
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: Row(
               children: [
                 IconButton(
                   icon: const Icon(Icons.attach_file),
-                  onPressed: () {
-                    // TODo: Handle attachments
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.mic),
-                  onPressed: () {
-                    // TODo: Handle voice message recording
-                  },
+                  onPressed: _pickReportFile,
                 ),
                 Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration: const InputDecoration(
-                      hintText: 'Type your message...',
-                      border: InputBorder.none,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    onSubmitted: _sendMessage,
+                    child: TextField(
+                      controller: _controller,
+                      decoration: const InputDecoration(
+                        hintText: 'Type your message...',
+                        border: InputBorder.none,
+                      ),
+                    ),
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () => _sendMessage(_controller.text),
+                  icon: const Icon(Icons.send, color: Colors.lightBlue),
+                  onPressed: _sendMessage,
                 ),
               ],
             ),
-          ),
+          )
         ],
       ),
     );

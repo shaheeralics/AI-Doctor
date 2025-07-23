@@ -16,6 +16,7 @@ class AIDocConnectApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+
     return MaterialApp(
       title: 'AI DocConnect',
       debugShowCheckedModeBanner: false,
@@ -35,9 +36,10 @@ class AIDocConnectApp extends StatelessWidget {
         ),
       ),
 
-      // 👇 Show LoginScreen first
+      // Initial route
       initialRoute: '/',
 
+      // Route definitions
       routes: {
         '/': (context) => const LoginScreen(),
         '/signup': (context) => const SignUpScreen(),

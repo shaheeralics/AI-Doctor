@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -9,19 +8,19 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  void handleSignUp() {
-    final email = emailController.text.trim();
-    final password = passwordController.text.trim();
+  void _handleSignUp() {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
 
     if (email.isNotEmpty && password.length >= 6) {
-      // Placeholder logic
+      // For demo: pretend signup is successful and go to chat
       Navigator.pushReplacementNamed(context, '/chat');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Enter valid email and password")),
+        const SnackBar(content: Text("Enter a valid email and password (6+ chars)")),
       );
     }
   }
@@ -37,22 +36,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Spacer(),
-              const Icon(Icons.medical_information,
-                  size: 60, color: Colors.lightBlue),
+              const Icon(Icons.person_add_alt_1, size: 60, color: Colors.lightBlue),
               const SizedBox(height: 16),
               const Text(
                 'Create AI DocConnect Account',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.lightBlue),
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.lightBlue,
+                ),
               ),
               const SizedBox(height: 40),
 
-              // Email
+              // Email Field
               TextField(
-                controller: emailController,
+                controller: _emailController,
                 decoration: const InputDecoration(
                   labelText: 'Email',
                   prefixIcon: Icon(Icons.email),
@@ -61,9 +60,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 16),
 
-              // Password
+              // Password Field
               TextField(
-                controller: passwordController,
+                controller: _passwordController,
                 obscureText: true,
                 decoration: const InputDecoration(
                   labelText: 'Password',
@@ -73,44 +72,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 20),
 
-              // SignUp Button
+              // Sign Up Button
               ElevatedButton(
-                onPressed: handleSignUp,
+                onPressed: _handleSignUp,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.lightBlue,
                   minimumSize: const Size(double.infinity, 48),
                 ),
                 child: const Text('Sign Up'),
               ),
-              const SizedBox(height: 20),
-
-              const Text("Or sign up with"),
-              const SizedBox(height: 12),
-
-              // Social Buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    icon: const FaIcon(FontAwesomeIcons.google,
-                        color: Colors.red),
-                    onPressed: () {}, // TODo: Implement Google sign-up
-                  ),
-                  IconButton(
-                    icon: const FaIcon(FontAwesomeIcons.github),
-                    onPressed: () {}, // TODo: Implement GitHub sign-up
-                  ),
-                  IconButton(
-                    icon: const FaIcon(FontAwesomeIcons.facebook,
-                        color: Colors.blue),
-                    onPressed: () {}, // TODo: Implement Facebook sign-up
-                  ),
-                ],
-              ),
-
               const Spacer(),
 
-              // Login text
+              // Go back to login
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
