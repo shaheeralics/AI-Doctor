@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:logger/logger.dart';
+
+
+
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -32,7 +36,9 @@ class _ChatScreenState extends State<ChatScreen> {
     if (result != null && result.files.isNotEmpty) {
       final file = result.files.first;
       // You can upload or display the file here
-      print('Picked file: ${file.name}');
+      var logger = Logger();
+
+      logger.i('Picked file: ${file.name}');
     }
   }
 
